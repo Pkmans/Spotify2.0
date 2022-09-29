@@ -4,28 +4,25 @@ import Center from "../components/Center";
 import Sidebar from "../components/Sidebar";
 import Player from "../components/Player";
 import { useState } from "react";
-import { useWindowSize } from "../lib/getWindowSize";
-import BurgerMenu from "../components/BurgerMenu";
 
 export default function Home() {
   const { data: session } = useSession();
-  const [showNav, setShowNav] = useState(false);
-  const { width } = useWindowSize();
+  const [showSideBar, setShowSideBar] = useState(false);
+
 
   function toggleSideBar() {
-    setShowNav((prev) => !prev);
+    setShowSideBar((prev) => !prev);
   }
 
   // console.log('home page session is', session);
 
   return (
     <div className="bg-black h-screen overflow-hidden">
-        {/* {width <= 570 && <BurgerMenu toggleSideBar={toggleSideBar} />} */}
       <main className="flex">
-        <Sidebar mobile={showNav} />
-        <Center />
+        <Sidebar />
+        <Center showSideBar={showSideBar} toggleSideBar={toggleSideBar}/>
       </main>
-      <div className="sticky bottom-0">
+      <div className={showSideBar ? "sticky bottom-0 blur-sm" : "sticky bottom-0"} >
         <Player />
       </div>
     </div>

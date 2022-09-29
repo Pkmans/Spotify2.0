@@ -16,8 +16,6 @@ function BurgerMenu({ toggleSideBar }) {
             stroke-linecap="round"
           />
         </svg>
-
-      {/* <img src="https://image-links.s3.amazonaws.com/menu.png"/> */}
     </button>
   );
 }

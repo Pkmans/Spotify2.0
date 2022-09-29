@@ -4,9 +4,9 @@ import Song from "./Song";
 
 function Songs({ playlist }) {
   return (
-    <div className="py-4 px-8 pb-28 text-white">
+    <div className="py-4 px-8 pb-28 text-white bg-[#0e0e0e]">
 
-      <div className="sticky top-0 bg-black">
+      <div>
         <div className="grid grid-cols-2 text-gray-400 px-5 py-1.5 text-sm">
           <div className="flex items-center space-x-3">
             <p>#</p>

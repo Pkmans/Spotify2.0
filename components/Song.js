@@ -25,7 +25,7 @@ function Song({ track, order }) {
     >
       <div className="flex items-center space-x-4">
         <p>{order + 1}</p>
-        <img className="w-10 h-10" src={track.track.album.images[0].url} />
+        <img className="w-10 h-10" src={track.track.album.images?.[0]?.url} />
         <div className="w-44 md:w-58 lg:w-64">
           <p className="text-white truncate">{track.track.name}</p>
           <p className="truncate ">{track.track.artists[0].name}</p>

@@ -67,6 +67,16 @@ function Player() {
     }
   }
 
+  function updateCurrentSong() {
+    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+      setCurrentTrackId(data.body?.item.id);
+    });
+
+    spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      setIsPlaying(data.body?.is_playing);
+    });
+  }
+
   useEffect(() => {
     if (spotifyApi.getAccessToken() && !currentTrackId) {
       fetchCurrentSong();
@@ -80,19 +90,42 @@ function Player() {
     }
   }, [volume]);
 
+
+  function skipToPrevious() {
+    fetch("https://api.spotify.com/v1/me/player/previous", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+      },
+    }).then(() => {
+      updateCurrentSong();
+    });
+  }
+
+  function skipToNext() {
+    fetch("https://api.spotify.com/v1/me/player/next", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+      },
+    }).then(() => {
+      updateCurrentSong();
+    });
+  }
+
   return (
     <>
-      {width <= 600 ? (
+      {width <= 639 ? (
         <div className="h-24 bg-gradient-to-b from-black to-gray-900 text-gray-400 text-xs md:text-base pt-3 px-2 md:px-8">
           <div className="grid grid-cols-2">
             {/* Left */}
             <div className="flex items-center space-x-5 pl-5">
               <img
-                className="w-8 h-8"
+                className="w-9 h-9"
                 src={songInfo?.album.images[0].url}
                 alt=""
               />
-              <div className="">
+              <div>
                 <h3 className="text-white">{songInfo?.name}</h3>
                 <p>{songInfo?.album.artists[0].name}</p>
               </div>
@@ -120,10 +153,7 @@ function Player() {
           {/* Bottom */}
           <div className="flex space-x-5 items-center justify-center">
             <SwitchHorizontalIcon className="button" />
-            <RewindIcon
-              //  onClick={() => spotifyApi.skipToPrevious()}
-              className="button"
-            />
+            <RewindIcon onClick={skipToPrevious} className="button" />
             {isPlaying ? (
               <PauseIcon
                 onClick={handlePlayPause}
@@ -135,10 +165,7 @@ function Player() {
                 className="button w-10 h-10"
               />
             )}
-            <FastForwardIcon
-              //  onClick={() => spotifyApi.skipToNext()}
-              className="button"
-            />
+            <FastForwardIcon onClick={skipToNext} className="button" />
             <RefreshIcon className="button" />
           </div>
         </div>

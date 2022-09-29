@@ -5,19 +5,23 @@ import useSpotify from "../hooks/useSpotify";
 
 import { millisToMinutesAndSeconds } from "../lib/timeConverter";
 
-function Song({ track, order }) {
+function Song({ playlist, track, order }) {
   const spotifyApi = useSpotify();
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState); 
 
+  console.log('playlist:', playlist);
+
   function playSong(){
-    // console.log("Playing song");
+    console.log(track);
     setCurrentTrackId(track.track.id);
     setIsPlaying(true);
     spotifyApi.play({
-        uris: [track.track.uri],
+        context_uri: playlist.uri,
+        offset: {"uri": track.track.uri}
     })
   }
+
 
   return (
     <div className="songs grid grid-cols-2 text-gray-400 px-5 py-1.5 hover:bg-gray-800 rounded-md cursor-pointer"

@@ -79,7 +79,7 @@ function Center({ showSideBar, toggleSideBar }) {
         </OutsideAlerter>
       )}
 
-      <div className={showSideBar && "blur-sm"}>
+      <div className={showSideBar ? "blur-sm" : ""}>
         <section
           className={`center-header flex items-end space-x-7 bg-gradient-to-b to-[#0e0e0e] ${color} text-white p-8 pt-24`}
         >

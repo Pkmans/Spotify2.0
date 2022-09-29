@@ -21,7 +21,7 @@ function Songs({ playlist }) {
       </div>
 
       {playlist?.tracks.items.map((track, i) => (
-        <Song key={track.track.id} track={track} order={i} />
+        <Song key={track.track.id} playlist={playlist} track={track} order={i} />
       ))}
     </div>
   );

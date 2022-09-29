@@ -10,7 +10,7 @@ function Song({ playlist, track, order }) {
   const [currentTrackId, setCurrentTrackId] = useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState); 
 
-  console.log('playlist:', playlist);
+  // console.log('playlist:', playlist);
 
   function playSong(){
     console.log(track);

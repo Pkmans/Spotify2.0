@@ -15,7 +15,7 @@ function Sidebar() {
   return (
     <div
       className="text-gray-500 p-5 text-sm border-r
-    border-gray-900"
+    border-gray-900 h-screen overflow-y-scroll scrollbar-hide"
     >
       <div className="space-y-4">
         <button className="flex items-center space-x-2 hover:text-white" onClick={() => signOut()}>
@@ -61,6 +61,11 @@ function Sidebar() {
         <p className="cursor-pointer hover:text-white">Playlist name...</p>
         <p className="cursor-pointer hover:text-white">Playlist name...</p>
         <p className="cursor-pointer hover:text-white">Playlist name...</p>
+        <p className="cursor-pointer hover:text-white">Playlist name...</p>
+        <p className="cursor-pointer hover:text-white">Playlist name...</p>
+        <p className="cursor-pointer hover:text-white">Playlist name...</p>
+        <p className="cursor-pointer hover:text-white">Playlist name...</p>
+
       </div>
     </div>
   );

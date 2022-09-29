@@ -64,14 +64,14 @@ export const authOptions = {
       // Access token has expired, try to update it
       return await refreshAccessToken(token);
     },
-  },
-  async session({ session, token }) {
-    session.user.username = token.user.username;
-    session.user.accessToken = token.accessToken;
-    session.user.refreshToken = token.refreshToken;
-    session.error = token.error;
-
-    return session;
+    async session({ session, token }) {
+      session.user.username = token.username;
+      session.user.accessToken = token.accessToken;
+      session.user.refreshToken = token.refreshToken;
+      session.error = token.error;
+  
+      return session;
+    },
   },
 };
 export default NextAuth(authOptions);

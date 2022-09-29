@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { signOut, useSession } from "next-auth/react";
-import { ChevronDownIcon } from "@heroicons/react/outline/esm";
 import { shuffle } from "lodash";
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
-import { millisToHoursAndMinutesAndSeconds, millisToMinutesAndSeconds } from "../lib/timeConverter";
+import {
+  millisToHoursAndMinutesAndSeconds,
+} from "../lib/timeConverter";
+import ProfileButton from "./ProfileButton";
 
 const colors = [
   "from-indigo-500",
@@ -21,7 +22,6 @@ const colors = [
 
 function Center() {
   const spotifyApi = useSpotify();
-  const { data: session } = useSession();
   const [color, setColor] = useState(null);
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
@@ -38,7 +38,7 @@ function Center() {
     });
 
     setPlaylistDuration(playlistDur);
-  }, [playlist])
+  }, [playlist]);
 
   useEffect(() => {
     spotifyApi
@@ -53,30 +53,26 @@ function Center() {
 
   console.log(playlist);
 
+
   return (
     <div className="flex-grow h-screen overflow-y-scroll">
-      <header className="absolute top-9 right-9">
-        <div
-          className="flex items-center space-x-3 bg-gray-900 text-white 
-          opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2"
-          onClick={signOut}
-        >
-          <img className="rounded-full w-10 h-10" src={session?.user.image} />
-          <h2>{session?.user.name}</h2>
-          <ChevronDownIcon className="w-5 h-5" />
-        </div>
-      </header>
+      <ProfileButton />
 
       <section
         className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
       >
-        <img className="w-[12.5rem] h-[12.5rem] shadow-2xl" src={playlist?.images?.[0].url} />
+        <img
+          className="w-[12.5rem] h-[12.5rem] shadow-2xl"
+          src={playlist?.images?.[0].url}
+        />
         <div className="">
           <p className="text-sm">PLAYLIST</p>
           <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
             {playlist?.name}
           </h1>
-          <p className="text-gray-400 text-xs md:text-sm xl:text-base mb-2">{playlist?.description}</p>
+          <p className="text-gray-400 text-xs md:text-sm xl:text-base mb-2">
+            {playlist?.description}
+          </p>
           <div className="flex space-x-2 text-xs flex-wrap">
             <p>{playlist?.owner.display_name}</p>
             <p>∙</p>
@@ -84,7 +80,9 @@ function Center() {
             <p>∙</p>
             <p>{playlist?.tracks.total} songs</p>
             <p>∙</p>
-            <p className="text-gray-400">{millisToHoursAndMinutesAndSeconds(playlistDuration)}</p>
+            <p className="text-gray-400">
+              {millisToHoursAndMinutesAndSeconds(playlistDuration)}
+            </p>
           </div>
         </div>
       </section>

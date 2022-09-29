@@ -31,8 +31,8 @@ function Sidebar({mobile}) {
 
   return (
     <div
-      style={{zIndex: 1}}
-      className={mobile ? ("absolute top-0 bg-black text-gray-400 p-5 text-xs lg:text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide w-[50%] sm:inline-flex") :
+      style={mobile && {zIndex: 1}}
+      className={mobile ? ("absolute top-0 bg-black text-gray-400 p-5 text-xs lg:text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide max-w-[50%] sm:inline-flex") :
       ("text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[10rem] md:max-w-[12rem] lg:max-w-[15rem] hidden sm:inline-flex")}
     >
       <div>

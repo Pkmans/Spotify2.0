@@ -14,7 +14,7 @@ function ProfileButton() {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <Menu.Button
-          className="menu-button flex items-center space-x-3 bg-gray-700 text-white 
+          className="menu-button flex items-center space-x-3 bg-gray-800 text-white 
               opacity-[90%] hover:opacity-100 cursor-pointer rounded-full p-1 pr-2"
         >
           <img className="rounded-full w-10 h-10" src={session?.user.image} />

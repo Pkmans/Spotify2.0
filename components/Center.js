@@ -9,15 +9,17 @@ import { millisToHoursAndMinutesAndSeconds } from "../lib/timeConverter";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import OutsideAlerter from "../hooks/outsideAlerter";
+import { useWindowSize } from "../lib/getWindowSize";
+import ProfileButton from "./ProfileButton";
 
 const colors = [
-  "indigo-500",
-  "blue-500",
-  "green-500",
-  "red-500",
-  "yellow-500",
-  "pink-500",
-  "purple-500",
+  "from-indigo-500",
+  "from-blue-500",
+  "from-green-500",
+  "from-red-500",
+  "from-yellow-500",
+  "from-pink-500",
+  "from-purple-500",
 ];
 
 function Center({ showSideBar, toggleSideBar }) {
@@ -26,6 +28,7 @@ function Center({ showSideBar, toggleSideBar }) {
   const playlistId = useRecoilValue(playlistIdState);
   const [playlist, setPlaylist] = useRecoilState(playlistState);
   const [playlistDuration, setPlaylistDuration] = useState(0);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     setColor(shuffle(colors).pop());
@@ -53,12 +56,6 @@ function Center({ showSideBar, toggleSideBar }) {
 
   // console.log(playlist);
 
-  function handleClick(e) {
-    console.log(e);
-    console.log(e.target);
-    console.log(e.currentTarget);
-  }
-
   return (
     <div
       className={
@@ -66,9 +63,16 @@ function Center({ showSideBar, toggleSideBar }) {
           ? "flex-grow h-screen"
           : "flex-grow h-screen overflow-y-scroll "
       }
-      onClick={handleClick}
     >
-      <Navbar toggleSideBar={toggleSideBar} color={color} />
+      {width <= 639 ? (
+        <Navbar toggleSideBar={toggleSideBar} color={color} />
+      ) : (
+        <div className="absolute top-5 right-5">
+
+        <ProfileButton />
+        </div>
+      )}
+
       {showSideBar && (
         <OutsideAlerter toggleSideBar={toggleSideBar}>
           <Sidebar mobile={showSideBar} />
@@ -77,7 +81,7 @@ function Center({ showSideBar, toggleSideBar }) {
 
       <div className={showSideBar && "blur-sm"}>
         <section
-          className={`center-header flex items-end space-x-7 bg-gradient-to-b to-[#0e0e0e] from-${color} text-white p-8 pt-24`}
+          className={`center-header flex items-end space-x-7 bg-gradient-to-b to-[#0e0e0e] ${color} text-white p-8 pt-24`}
         >
           <img
             className="shadow-2xl lg:w-[12.5rem] lg:h-[12.5rem] md:w-[10.5rem] md:h-[10.5rem] 

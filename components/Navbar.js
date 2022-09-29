@@ -4,20 +4,19 @@ import { useWindowSize } from "../lib/getWindowSize";
 import BurgerMenu from "./BurgerMenu";
 import ProfileButton from "./ProfileButton";
 
-function Navbar({toggleSideBar, color}) {
+function Navbar({toggleSideBar}) {
   const { width } = useWindowSize();
 
-  console.log(color);
 
   return (
     <header
       className={
-        width <= 570
-          ? `sticky top-0 profile-button flex justify-between p-2 bg-black`
-          : `profile-button flex justify-end p-3 bg-${color}` 
+        width <= 639
+          ? `sticky top-0 profile-button flex justify-between p-2 pt-1 pb-1 bg-gray-800`
+          : `profile-button flex justify-end p-2 bg-gray-800` 
       }
     >
-      {width <= 570 && <BurgerMenu toggleSideBar={toggleSideBar}/>}
+      {width <= 639 && <BurgerMenu toggleSideBar={toggleSideBar}/>}
       <ProfileButton />
     </header>
   );

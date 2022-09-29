@@ -28,6 +28,7 @@ function Player() {
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+  const [shuffle, setShuffle] = useState(false);
   const [volume, setVolume] = useState(50);
   const { width } = useWindowSize();
 
@@ -108,9 +109,15 @@ function Player() {
       headers: {
         Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
       },
-    }).then(() => {
+    }).then((data) => {
+      console.log(data);
       updateCurrentSong();
     });
+  }
+
+  function toggleShuffle() {
+    spotifyApi.setShuffle(!shuffle);
+    setShuffle((prev) => !prev);
   }
 
   return (
@@ -154,7 +161,10 @@ function Player() {
           <div className="grid grid-rows-2 justify-center">
             {/* Center */}
             <div className="flex space-x-5 items-center justify-center">
-              <SwitchHorizontalIcon className="button" />
+              <SwitchHorizontalIcon
+                className={shuffle ? "button text-green-500" : "button"}
+                onClick={toggleShuffle}
+              />
               <RewindIcon onClick={skipToPrevious} className="button" />
               {isPlaying ? (
                 <PauseIcon
@@ -196,7 +206,10 @@ function Player() {
             <div className="grid items-center justify-center">
               {/* Center */}
               <div className="flex space-x-5 items-center justify-center">
-                <SwitchHorizontalIcon className="button" />
+                <SwitchHorizontalIcon
+                  className="button"
+                  onClick={toggleShuffle}
+                />
                 <RewindIcon onClick={skipToPrevious} className="button" />
                 {isPlaying ? (
                   <PauseIcon

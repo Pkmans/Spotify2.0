@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
+import { signIn } from "next-auth/react";
 import spotifyApi, { LOGIN_URL } from "../../../lib/spotify";
 
 /**
@@ -13,7 +14,6 @@ async function refreshAccessToken(token) {
     spotifyApi.setRefreshToken(token.refreshToken);
 
     const { body: refreshedToken } = await spotifyApi.refreshAccessToken();
-    console.log("REFRESHED TOKEN IS: ", refreshedToken);
 
     return {
       ...token,
@@ -39,10 +39,10 @@ export const authOptions = {
       authorization: LOGIN_URL,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",
   },
-  secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async jwt({ token, account, user }) {
       // Initial sign in
@@ -58,12 +58,10 @@ export const authOptions = {
 
       // Return previous token if the access token has not expired yet
       if (Date.now() < token.accessTokenExpires) {
-        console.log("EXISTING ACCESS TOKEN IS STILL VALID");
         return token;
       }
 
       // Access token has expired, try to update it
-      console.log("ACCESS TOKEN IS EXPIRED, REFRESHING...");
       return await refreshAccessToken(token);
     },
   },

@@ -5,9 +5,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { playlistIdState, playlistState } from "../atoms/playlistAtom";
 import useSpotify from "../hooks/useSpotify";
 import Songs from "./Songs";
-import {
-  millisToHoursAndMinutesAndSeconds,
-} from "../lib/timeConverter";
+import { millisToHoursAndMinutesAndSeconds } from "../lib/timeConverter";
 import ProfileButton from "./ProfileButton";
 
 const colors = [
@@ -53,20 +51,20 @@ function Center() {
 
   console.log(playlist);
 
-
   return (
     <div className="flex-grow h-screen overflow-y-scroll">
       <ProfileButton />
 
       <section
-        className={`flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
+        className={`center-header flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
       >
         <img
-          className="w-[12.5rem] h-[12.5rem] shadow-2xl"
+          className="shadow-2xl lg:w-[12.5rem] lg:h-[12.5rem] md:w-[10.5rem] md:h-[10.5rem] 
+          w-[11rem] h-[11rem]"
           src={playlist?.images?.[0].url}
         />
-        <div className="">
-          <p className="text-sm">PLAYLIST</p>
+        <div className="content">
+          <p className="playlist-text text-sm">PLAYLIST</p>
           <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
             {playlist?.name}
           </h1>

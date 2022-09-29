@@ -30,8 +30,8 @@ function Sidebar() {
   return (
     <div
       className="text-gray-500 p-5 text-xs lg:text-sm border-r
-    border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[12rem] 
-    lg:max-w-[15rem] hidden md:inline-flex"
+    border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[10rem] md:max-w-[12rem] 
+    lg:max-w-[15rem] hidden sm:inline-flex"
     >
       <div>
         <div className="space-y-3 pb-28">
@@ -63,7 +63,6 @@ function Sidebar() {
           </button>
           <hr className="border-gray-800" />
 
-          {/* Playlists */}
           {playlists.map((playlist) => (
             <p
               key={playlist.id}

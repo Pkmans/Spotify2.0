@@ -35,3 +35,40 @@ a {
     background: black;
   }
 }
+
+@media (max-width: 570px) {
+  .center-header {
+    display: inline-block;
+  }
+
+  .center-header .content {
+    margin-left: 0px !important;
+  }
+
+  .center-header img {
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+
+  .center-header .playlist-text {
+    display: none;
+  }
+
+  .center-header h1 {
+    font-size: 24px;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-button .username, .profile-button .icon {
+    display: none;
+  }
+
+  .profile-button .menu-button {
+    padding: 3px;
+  }
+
+  .songs {
+    font-size: 12px;
+  }
+
+}

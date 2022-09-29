@@ -13,16 +13,16 @@ function ProfileButton() {
   }
 
   return (
-    <header className="absolute top-9 right-9">
+    <header className="profile-button absolute top-9 right-9">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button
-            className="flex items-center space-x-3 bg-gray-900 text-white 
+            className="menu-button flex items-center space-x-3 bg-gray-900 text-white 
               opacity-[90%] hover:opacity-100 cursor-pointer rounded-full p-1 pr-2"
           >
             <img className="rounded-full w-10 h-10" src={session?.user.image} />
-            <h2>{session?.user.name}</h2>
-            <ChevronDownIcon className="w-5 h-5" />
+            <h2 className="username">{session?.user.name}</h2>
+            <ChevronDownIcon className="icon w-5 h-5" />
           </Menu.Button>
         </div>
 

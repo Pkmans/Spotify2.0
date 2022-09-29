@@ -13,7 +13,7 @@ function Songs({ playlist }) {
             <p>TITLE</p>
           </div>
           <div className="flex items-center justify-between ml-auto md:ml-0">
-            <p>ALBUM</p>
+            <p className="hidden md:inline">ALBUM</p>
             <ClockIcon className="w-5 h-5" />
           </div>
         </div>

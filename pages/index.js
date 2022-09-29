@@ -2,10 +2,8 @@ import Sidebar from "../components/Sidebar";
 
 export default function Home() {
   return (
-    <div className=''>
-      <h1>This is a spotify clone</h1>
-      
-      <main>
+    <div className='bg-black h-screen overflow-hidden'>      
+      <main >
         <Sidebar />
         {/* Center */}
       </main>

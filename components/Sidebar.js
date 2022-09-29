@@ -47,7 +47,7 @@ function Sidebar() {
             <LibraryIcon className="w-5 h-5" />
             <p>Your Library</p>
           </button>
-          <hr className="border-t-1 border-gray-900" />
+          <hr className="border-gray-800" />
 
           <button className="flex items-center space-x-2 hover:text-white">
             <PlusCircleIcon className="w-5 h-5" />
@@ -61,7 +61,7 @@ function Sidebar() {
             <RssIcon className="w-5 h-5" />
             <p>Your Episodes</p>
           </button>
-          <hr className="border-t-1 border-gray-900" />
+          <hr className="border-gray-800" />
 
           {/* Playlists */}
           {playlists.map((playlist) => (

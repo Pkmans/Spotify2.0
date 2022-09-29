@@ -33,8 +33,8 @@ function Song({ track, order }) {
       </div>
 
       <div className="flex items-center justify-between ml-auto md:ml-0">
-        <p className="w-40 hidden md:inline">{track.track.album.name}</p>
-        <p>{millisToMinutesAndSeconds(track.track.duration_ms)}</p>
+        <p className="w-42 hidden md:inline truncate">{track.track.album.name}</p>
+        <p className="pl-6">{millisToMinutesAndSeconds(track.track.duration_ms)}</p>
       </div>
     </div>
   );

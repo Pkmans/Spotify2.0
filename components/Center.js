@@ -55,9 +55,9 @@ function Center() {
 
   return (
     <div className="flex-grow h-screen overflow-y-scroll">
-      <header className="absolute top-5 right-8">
+      <header className="absolute top-9 right-9">
         <div
-          className="flex items-center space-x-3 bg-black text-white 
+          className="flex items-center space-x-3 bg-gray-900 text-white 
           opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2"
           onClick={signOut}
         >
@@ -73,11 +73,11 @@ function Center() {
         <img className="w-[12.5rem] h-[12.5rem] shadow-2xl" src={playlist?.images?.[0].url} />
         <div className="">
           <p className="text-sm">PLAYLIST</p>
-          <h1 className="text-2xl md:text-3xl xl:text-6xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
             {playlist?.name}
           </h1>
-          <p className="text-gray-400">{playlist?.description}</p>
-          <div className="flex space-x-2">
+          <p className="text-gray-400 text-xs md:text-sm xl:text-base mb-2">{playlist?.description}</p>
+          <div className="flex space-x-2 text-xs flex-wrap">
             <p>{playlist?.owner.display_name}</p>
             <p>∙</p>
             <p>{playlist?.followers.total} likes</p>

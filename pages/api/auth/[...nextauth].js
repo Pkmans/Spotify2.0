@@ -47,6 +47,7 @@ export const authOptions = {
     async jwt({ token, account, user }) {
       // Initial sign in
       if (account && user) {
+        console.log('initial sign in');
         return {
           ...token,
           accessToken: account.access_token,

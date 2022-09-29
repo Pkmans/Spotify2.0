@@ -7,7 +7,7 @@ import Player from "../components/Player";
 
 export default function Home() {
   const {data: session} = useSession();
-  console.log('home page session is', session);
+  // console.log('home page session is', session);
 
   return (
     <div className='bg-black h-screen overflow-hidden'>      

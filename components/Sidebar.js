@@ -17,7 +17,7 @@ function Sidebar() {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
-  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);  
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState);
 
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
@@ -33,39 +33,47 @@ function Sidebar() {
     border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[12rem] 
     lg:max-w-[15rem] hidden md:inline-flex"
     >
-      <div className="space-y-3">
-        <button className="flex items-center space-x-2 hover:text-white">
-          <HomeIcon className="w-5 h-5" />
-          <p>Home</p>
-        </button>
-        <button className="flex items-center space-x-2 hover:text-white">
-          <SearchIcon className="w-5 h-5" />
-          <p>Search</p>
-        </button>
-        <button className="flex items-center space-x-2 hover:text-white">
-          <LibraryIcon className="w-5 h-5" />
-          <p>Your Library</p>
-        </button>
-        <hr className="border-t-1 border-gray-900" />
+      <div>
+        <div className="space-y-3 pb-28">
+          <button className="flex items-center space-x-2 hover:text-white">
+            <HomeIcon className="w-5 h-5" />
+            <p>Home</p>
+          </button>
+          <button className="flex items-center space-x-2 hover:text-white">
+            <SearchIcon className="w-5 h-5" />
+            <p>Search</p>
+          </button>
+          <button className="flex items-center space-x-2 hover:text-white">
+            <LibraryIcon className="w-5 h-5" />
+            <p>Your Library</p>
+          </button>
+          <hr className="border-t-1 border-gray-900" />
 
-        <button className="flex items-center space-x-2 hover:text-white">
-          <PlusCircleIcon className="w-5 h-5" />
-          <p>Create Playlist</p>
-        </button>
-        <button className="flex items-center space-x-2 hover:text-white">
-          <HeartIcon className="w-5 h-5" />
-          <p>Liked Songs</p>
-        </button>
-        <button className="flex items-center space-x-2 hover:text-white">
-          <RssIcon className="w-5 h-5" />
-          <p>Your Episodes</p>
-        </button>
-        <hr className="border-t-1 border-gray-900" />
+          <button className="flex items-center space-x-2 hover:text-white">
+            <PlusCircleIcon className="w-5 h-5" />
+            <p>Create Playlist</p>
+          </button>
+          <button className="flex items-center space-x-2 hover:text-white">
+            <HeartIcon className="w-5 h-5" />
+            <p>Liked Songs</p>
+          </button>
+          <button className="flex items-center space-x-2 hover:text-white">
+            <RssIcon className="w-5 h-5" />
+            <p>Your Episodes</p>
+          </button>
+          <hr className="border-t-1 border-gray-900" />
 
-        {/* Playlists */}
-        {playlists.map((playlist) => (
-          <p key={playlist.id} onClick={() => setPlaylistId(playlist.id)} className="cursor-pointer hover:text-white">{playlist.name}</p>
-        ))}
+          {/* Playlists */}
+          {playlists.map((playlist) => (
+            <p
+              key={playlist.id}
+              onClick={() => setPlaylistId(playlist.id)}
+              className="cursor-pointer hover:text-white"
+            >
+              {playlist.name}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );

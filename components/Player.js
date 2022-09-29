@@ -29,7 +29,7 @@ function Player() {
 
   const songInfo = useSongInfo();
 
-  console.log(songInfo);
+  // console.log(songInfo);
 
   function handlePlayPause() {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
@@ -53,8 +53,8 @@ function Player() {
   function fetchCurrentSong() {
     if (!songInfo) {
       spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-        console.log("Now playing: " + data.body?.item.name);
-        console.log(data);
+        // console.log("Now playing: " + data.body?.item.name);
+        // console.log(data);
         setCurrentTrackId(data.body?.item.id);
       });
 

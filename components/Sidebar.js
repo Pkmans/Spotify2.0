@@ -33,7 +33,7 @@ function Sidebar() {
     border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[12rem] 
     lg:max-w-[15rem] hidden md:inline-flex"
     >
-      <div className="space-y-4">
+      <div className="space-y-3">
         <button className="flex items-center space-x-2 hover:text-white">
           <HomeIcon className="w-5 h-5" />
           <p>Home</p>

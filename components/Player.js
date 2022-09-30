@@ -1,6 +1,7 @@
 import {
   RefreshIcon,
   SwitchHorizontalIcon,
+  VolumeOffIcon,
 } from "@heroicons/react/outline/esm";
 import {
   FastForwardIcon,
@@ -10,12 +11,13 @@ import {
   VolumeUpIcon,
 } from "@heroicons/react/solid/esm";
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 import { currentTrackIdState, isPlayingState } from "../atoms/songAtom";
 import useSpotify from "../hooks/useSpotify";
 import useSongInfo from "../hooks/useSongInfo";
+import { debounce } from "lodash";
 
 function Player() {
   const spotifyApi = useSpotify();
@@ -29,13 +31,9 @@ function Player() {
 
   console.log(songInfo);
 
-  function handleVolume(e) {
-    setVolume(e.target.value);
-  }
-
   function handlePlayPause() {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      if (data?.body.is_playing) {
+      if (data.body?.is_playing) {
         spotifyApi.pause();
         setIsPlaying(false);
       } else {
@@ -45,16 +43,23 @@ function Player() {
     });
   }
 
+  const debouncedAdjustVolume = useCallback(
+    debounce((volume) => {
+      spotifyApi.setVolume(volume).catch((err) => {});
+    }, 250),
+    []
+  );
+
   function fetchCurrentSong() {
     if (!songInfo) {
       spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-        console.log("Now playing: " + data?.body.item.name);
+        console.log("Now playing: " + data.body?.item.name);
         console.log(data);
-        setCurrentTrackId(data?.body.item.id);
+        setCurrentTrackId(data.body?.item.id);
       });
 
       spotifyApi.getMyCurrentPlaybackState().then((data) => {
-        setIsPlaying(data?.body.is_playing);
+        setIsPlaying(data.body?.is_playing);
       });
     }
   }
@@ -65,6 +70,12 @@ function Player() {
       setVolume(50);
     }
   }, [currentTrackIdState, spotifyApi, session]);
+
+  useEffect(() => {
+    if (volume > 0 && volume < 100) {
+      debouncedAdjustVolume(volume);
+    }
+  }, [volume]);
 
   return (
     <div
@@ -105,14 +116,19 @@ function Player() {
 
       {/* Right */}
       <div className="flex items-center space-x-3 md:spacex-4 justify-end pr-5">
-        <VolumeUpIcon className="button" />
+        {volume <= 0 ? (
+          <VolumeOffIcon className="button" />
+        ) : (
+          <VolumeUpIcon onClick={() => setVolume(0)} className="button" />
+        )}
+
         <input
           className="w-14 md:w-28"
           type="range"
           value={volume}
           min={0}
           max={100}
-          onChange={handleVolume}
+          onChange={(e) => setVolume(Number(e.target.value))}
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 import Center from "../components/Center";
 import Sidebar from "../components/Sidebar";
-import {useSession} from 'next-auth/react';
+import {getSession, useSession} from 'next-auth/react';
 
 
 export default function Home() {
@@ -17,4 +17,13 @@ export default function Home() {
       <div></div>
     </div>
   )
+}
+
+// Get Session before client renders 
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: { session }
+  }
 }

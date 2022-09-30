@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .button {
+    @apply w-5 h-5 cursor-pointer hover:scale-125 transition transform
+    duration-150 ease-in-out;
+  }
+}
+
 html,
 body {
   padding: 0;

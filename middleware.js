@@ -2,10 +2,12 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
 export async function middleware(req) {
+  console.log('middle ware function called.');
+
   // Token will exist if user is logged in
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const validToken = token && Date.now() < token.accessTokenExpires;
-
+  
   const { pathname } = req.nextUrl;
 
   // Allow requests if the following is true

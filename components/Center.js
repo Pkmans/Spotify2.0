@@ -51,12 +51,14 @@ function Center() {
 
   console.log(playlist);
 
+ 
+
   return (
     <div className="flex-grow h-screen overflow-y-scroll">
+      
       <ProfileButton />
-
       <section
-        className={`center-header flex items-end space-x-7 bg-gradient-to-b to-black ${color} h-80 text-white p-8`}
+        className={`center-header flex items-end space-x-7 bg-gradient-to-b to-black ${color} text-white p-8 pt-24`}
       >
         <img
           className="shadow-2xl lg:w-[12.5rem] lg:h-[12.5rem] md:w-[10.5rem] md:h-[10.5rem] 
@@ -84,7 +86,6 @@ function Center() {
           </div>
         </div>
       </section>
-
       <div>
         <Songs playlist={playlist} />
       </div>

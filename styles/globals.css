@@ -37,8 +37,12 @@ a {
 }
 
 @media (max-width: 570px) {
+  .container {
+    /* display: block; */
+  }
+
   .center-header {
-    display: inline-block;
+    display: block;
   }
 
   .center-header .content {

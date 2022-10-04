@@ -13,7 +13,7 @@ import { useRecoilState } from "recoil";
 
 import { playlistIdState } from "../atoms/playlistAtom";
 
-function Sidebar() {
+function Sidebar({mobile}) {
   const spotifyApi = useSpotify();
   const { data: session, status } = useSession();
   const [playlists, setPlaylists] = useState([]);
@@ -29,9 +29,8 @@ function Sidebar() {
 
   return (
     <div
-      className="text-gray-500 p-5 text-xs lg:text-sm border-r
-    border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[10rem] md:max-w-[12rem] 
-    lg:max-w-[15rem] hidden sm:inline-flex"
+      className={mobile ? ("text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide w-[100%] sm:inline-flex") :
+      ("text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[10rem] md:max-w-[12rem] lg:max-w-[15rem] hidden sm:inline-flex")}
     >
       <div>
         <div className="space-y-3 pb-28">

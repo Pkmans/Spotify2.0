@@ -9,6 +9,7 @@ import spotifyApi, { LOGIN_URL } from "../../../lib/spotify";
  * returns the old token and an error property
  */
 async function refreshAccessToken(token) {
+  console.log('refresh Access Token function called.');
   try {
     spotifyApi.setAccessToken(token.accessToken);
     spotifyApi.setRefreshToken(token.refreshToken);
@@ -45,15 +46,15 @@ export const authOptions = {
   },
   callbacks: {
     async jwt({ token, account, user }) {
+
       // Initial sign in
       if (account && user) {
-        console.log('initial sign in');
         return {
           ...token,
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
           username: account.providerAccountId,
-          accessTokenExpires: Date.now() + account.expires_at * 1000,
+          accessTokenExpires: account.expires_at * 1000,
         };
       }
 

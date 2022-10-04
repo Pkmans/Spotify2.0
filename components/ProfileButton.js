@@ -1,9 +1,8 @@
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/outline/esm";
-
-
+import BurgerMenu from "./BurgerMenu";
 
 function ProfileButton() {
   const { data: session } = useSession();
@@ -13,7 +12,8 @@ function ProfileButton() {
   }
 
   return (
-    <header className="profile-button absolute top-9 right-9">
+    <header className="profile-button flex justify-between">
+      <BurgerMenu />
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button

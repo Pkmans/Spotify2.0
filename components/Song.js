@@ -31,17 +31,20 @@ function Song({ playlist, track, order }) {
       onClick={playSong}
     >
       <div className="flex items-center space-x-4">
-        {currentTrackId === track.track.id ? (
-          <Lottie
-            animationData={audioBarAnimation}
-            style={{ width: 30}}
-            loop={true}
-          />
-        ) : (
-          <p>{order + 1}</p>
-        )}
+        <div className="grid grid-cols-3 items-center">
+          {currentTrackId === track.track.id ? (
+            <Lottie
+              animationData={audioBarAnimation}
+              style={{ width: 25 }}
+              loop={true}
+            />
+          ) : (
+            <p className="col-span-1 text-right ">{order + 1}</p>
+          )}
 
-        <img className="w-10 h-10" src={track.track.album.images?.[0]?.url} />
+          <img className="col-span-2 ml-2.5 w-10 h-10" src={track.track.album.images?.[0]?.url} />
+        </div>
+
         <div className="w-44 md:w-58 lg:w-64">
           <p
             className={

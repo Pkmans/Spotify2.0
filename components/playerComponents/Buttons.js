@@ -24,8 +24,9 @@ function Buttons() {
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState);
 
-  // Initial Render, fetch if Music is currently already playing
+  // Initial Render
   useEffect(() => {
+    // fetch if Music is currently already playing
     if (spotifyApi.getAccessToken() && !currentTrackId) {
       if (!songInfo) {
         spotifyApi.getMyCurrentPlaybackState().then((data) => {
@@ -33,6 +34,11 @@ function Buttons() {
         });
       }
     }
+
+    // Set existing Spotify Shuffle State
+    spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      setShuffle(data.body?.shuffle_state);
+    });
   }, []);
 
   // Play or Pause Track
@@ -56,7 +62,7 @@ function Buttons() {
         Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
       },
     }).then(() => {
-      updateCurrentSong();
+      fetchUpdatedSong();
     });
   }
 
@@ -67,20 +73,25 @@ function Buttons() {
       headers: {
         Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
       },
-    }).then((data) => {
-      console.log(data);
-      updateCurrentSong();
+    }).then(() => {
+      fetchUpdatedSong();
     });
   }
 
-  function updateCurrentSong() {
-    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-      setCurrentTrackId(data.body?.item.id);
-    });
-
-    spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      setIsPlaying(data.body?.is_playing);
-    });
+  function fetchUpdatedSong() {
+    spotifyApi
+      .getMyCurrentPlayingTrack()
+      .then((data) => {
+        console.log(
+          "fetch updated song: ",
+          data.body.item.name,
+          data.body.item.id
+        );
+        setCurrentTrackId(data.body?.item.id);
+      })
+      .then(() =>
+        console.log("currenttrackid after setting: ", currentTrackId)
+      );
   }
 
   // Toggle Shuffle of playlist

@@ -24,6 +24,7 @@ function TrackInfo() {
     }
   }, []);
 
+
   return (
     <div className="flex items-center space-x-5 pl-5">
       <img className="w-9 h-9" src={songInfo?.album.images[0].url} alt="" />

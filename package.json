@@ -12,6 +12,7 @@
     "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^1.0.6",
     "lodash": "^4.17.21",
+    "lottie-react": "^2.3.1",
     "next": "12.3.1",
     "next-auth": "^4.12.2",
     "react": "18.2.0",

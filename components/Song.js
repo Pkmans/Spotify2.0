@@ -22,7 +22,6 @@ function Song({ playlist, track, order }) {
     })
   }
 
-
   return (
     <div className="songs grid grid-cols-2 text-gray-400 px-5 py-1.5 hover:bg-gray-800 rounded-md cursor-pointer"
         onClick={playSong}

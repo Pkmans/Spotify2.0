@@ -24,20 +24,18 @@ function Player() {
           </div>
         </div>
       ) : (
-        <div>
-          <div
-            className=" bg-gradient-to-b from-black to-gray-900 text-gray-400
+        <div
+          className=" bg-gradient-to-b from-black to-gray-900 text-gray-400
       grid grid-cols-3 text-xs md:text-base py-2 px-2 md:px-8"
-          >
-            <TrackInfo />
+        >
+          <TrackInfo />
 
-            <div className="grid items-center justify-center">
-              <Buttons />
-              <ProgressBar />
-            </div>
-
-            <VolumeSlider />
+          <div className="grid items-center justify-center">
+            <Buttons />
+            <ProgressBar />
           </div>
+
+          <VolumeSlider />
         </div>
       )}
     </>

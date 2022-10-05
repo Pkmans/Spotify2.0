@@ -125,6 +125,7 @@ function Buttons() {
         <PlayIcon onClick={handlePlayPause} className="button w-10 h-10" />
       )}
       <FastForwardIcon onClick={skipToNext} className="button" />
+
       {repeat === "off" && (
         <MdRepeat className="button" onClick={toggleRepeat} />
       )}
@@ -134,6 +135,7 @@ function Buttons() {
       {repeat === "track" && (
         <MdRepeatOne className="button text-green-500" onClick={toggleRepeat} />
       )}
+      
     </div>
   );
 }

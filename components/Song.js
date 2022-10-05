@@ -13,8 +13,6 @@ function Song({ playlist, track, order }) {
     useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
-  // console.log('playlist:', playlist);
-
   function playSong() {
     console.log(track);
     setCurrentTrackId(track.track.id);
@@ -32,12 +30,10 @@ function Song({ playlist, track, order }) {
     >
       <div className="flex items-center space-x-4">
         <div className="grid grid-cols-3 items-center">
+
+          {/* Show Audio Bar if song playing, otherwise Track # */}
           {currentTrackId === track.track.id ? (
-            <Lottie
-              animationData={audioBarAnimation}
-              style={{ width: 25 }}
-              loop={true}
-            />
+            <Lottie animationData={audioBarAnimation} style={{ width: 25 }} loop={true} />
           ) : (
             <p className="col-span-1 text-right ">{order + 1}</p>
           )}
@@ -45,6 +41,7 @@ function Song({ playlist, track, order }) {
           <img className="col-span-2 ml-2.5 w-10 h-10" src={track.track.album.images?.[0]?.url} />
         </div>
 
+        {/* Track name Green if song playing */}
         <div className="w-44 md:w-58 lg:w-64">
           <p
             className={
@@ -57,8 +54,10 @@ function Song({ playlist, track, order }) {
           </p>
           <p className="truncate ">{track.track.artists[0].name}</p>
         </div>
+
       </div>
 
+      {/* Album Name & Duration */}
       <div className="flex items-center justify-between ml-auto md:ml-0">
         <p className="hidden md:inline truncate">{track.track.album.name}</p>
         <p className="pl-6">

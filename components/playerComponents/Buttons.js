@@ -9,6 +9,8 @@ import {
   RefreshIcon,
   SwitchHorizontalIcon,
 } from "@heroicons/react/outline/esm";
+import { BiShuffle } from "react-icons/bi";
+import { MdRepeat, MdRepeatOne } from "react-icons/md";
 import { useRecoilState } from "recoil";
 
 import useSpotify from "../../hooks/useSpotify";
@@ -20,6 +22,7 @@ function Buttons() {
   const songInfo = useSongInfo();
 
   const [shuffle, setShuffle] = useState(false);
+  const [repeat, setRepeat] = useState("off");
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState);
@@ -35,9 +38,11 @@ function Buttons() {
       }
     }
 
-    // Set existing Spotify Shuffle State
+    // Set existing Spotify Shuffle State & Repeat Mode
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      console.log(data);
       setShuffle(data.body?.shuffle_state);
+      setRepeat(data.body?.repeat_state);
     });
   }, []);
 
@@ -82,16 +87,8 @@ function Buttons() {
     spotifyApi
       .getMyCurrentPlayingTrack()
       .then((data) => {
-        console.log(
-          "fetch updated song: ",
-          data.body.item.name,
-          data.body.item.id
-        );
         setCurrentTrackId(data.body?.item.id);
       })
-      .then(() =>
-        console.log("currenttrackid after setting: ", currentTrackId)
-      );
   }
 
   // Toggle Shuffle of playlist
@@ -102,9 +99,22 @@ function Buttons() {
     setShuffle((prev) => !prev);
   }
 
+  function toggleRepeat() {
+    if (repeat === "off") {
+      spotifyApi.setRepeat("context");
+      setRepeat("context");
+    } else if (repeat === "context") {
+      spotifyApi.setRepeat("track");
+      setRepeat("track");
+    } else if (repeat === "track") {
+      spotifyApi.setRepeat("off");
+      setRepeat("off");
+    }
+  }
+
   return (
     <div className="flex space-x-5 items-center justify-center">
-      <SwitchHorizontalIcon
+      <BiShuffle
         className={shuffle ? "button text-green-500" : "button"}
         onClick={toggleShuffle}
       />
@@ -115,7 +125,15 @@ function Buttons() {
         <PlayIcon onClick={handlePlayPause} className="button w-10 h-10" />
       )}
       <FastForwardIcon onClick={skipToNext} className="button" />
-      <RefreshIcon className="button" />
+      {repeat === "off" && (
+        <MdRepeat className="button" onClick={toggleRepeat} />
+      )}
+      {repeat === "context" && (
+        <MdRepeat className="button text-green-500" onClick={toggleRepeat} />
+      )}
+      {repeat === "track" && (
+        <MdRepeatOne className="button text-green-500" onClick={toggleRepeat} />
+      )}
     </div>
   );
 }

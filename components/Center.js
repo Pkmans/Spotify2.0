@@ -8,7 +8,7 @@ import Songs from "./Songs";
 import { millisToHoursAndMinutesAndSeconds } from "../lib/timeConverter";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import OutsideAlerter from "../hooks/outsideAlerter";
+import OutsideAlerter from "../hooks/OutsideAlerter";
 import { useWindowSize } from "../lib/getWindowSize";
 import ProfileButton from "./ProfileButton";
 

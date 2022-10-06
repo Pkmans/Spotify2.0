@@ -1,8 +1,8 @@
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import useSongInfo from "../hooks/useSongInfo";
-import useSpotify from "../hooks/useSpotify";
-import { millisToMinutesAndSeconds } from "../lib/timeConverter";
+import useSongInfo from "../../hooks/useSongInfo";
+import useSpotify from "../../hooks/useSpotify";
+import { millisToMinutesAndSeconds } from "../../lib/timeConverter";
 
 function ProgressBar() {
   const spotifyApi = useSpotify();

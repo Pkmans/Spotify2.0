@@ -93,11 +93,11 @@ function Center({ showSideBar, toggleSideBar }) {
             <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold mb-4">
               {playlist?.name}
             </h1>
-            <p className="text-gray-400 text-xs md:text-sm xl:text-base mb-2">
+            <p className="text-gray-400 text-sm md:text-base xl:text-lg mb-2">
               {playlist?.description}
             </p>
-            <div className="flex space-x-2 text-xs flex-wrap">
-              <p>{playlist?.owner.display_name}</p>
+            <div className="flex space-x-2 text-sm flex-wrap">
+              <p className="font-bold">{playlist?.owner.display_name}</p>
               <p>∙</p>
               <p>{playlist?.followers.total} likes</p>
               <p>∙</p>

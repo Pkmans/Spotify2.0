@@ -5,10 +5,6 @@ import {
   RewindIcon,
   PlayIcon,
 } from "@heroicons/react/solid/esm";
-import {
-  RefreshIcon,
-  SwitchHorizontalIcon,
-} from "@heroicons/react/outline/esm";
 import { BiShuffle } from "react-icons/bi";
 import { MdRepeat, MdRepeatOne } from "react-icons/md";
 import { useRecoilState } from "recoil";
@@ -59,36 +55,41 @@ function Buttons() {
     });
   }
 
+  // Timeout Function
+  const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
   // Go to Previous Track in Playlist
-  function skipToPrevious() {
-    fetch("https://api.spotify.com/v1/me/player/previous", {
+  async function skipToPrevious() {
+    await fetch("https://api.spotify.com/v1/me/player/previous", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
       },
-    }).then(() => {
-      fetchUpdatedSong();
     });
+    setIsPlaying(true);
+    await timeout(400); // Delayed fetch in order to get updated song.
+
+    fetchUpdatedSong();
   }
 
   // Go to Next Track in Playlist
-  function skipToNext() {
-    fetch("https://api.spotify.com/v1/me/player/next", {
+  async function skipToNext() {
+    await fetch("https://api.spotify.com/v1/me/player/next", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
       },
-    }).then(() => {
-      fetchUpdatedSong();
-    });
+    })
+    setIsPlaying(true);
+    await timeout(400); // Delayed fetch in order to get updated song.
+
+    fetchUpdatedSong();
   }
 
   function fetchUpdatedSong() {
-    spotifyApi
-      .getMyCurrentPlayingTrack()
-      .then((data) => {
-        setCurrentTrackId(data.body?.item.id);
-      })
+    spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+      setCurrentTrackId(data.body?.item.id);
+    });
   }
 
   // Toggle Shuffle of playlist
@@ -120,9 +121,15 @@ function Buttons() {
       />
       <RewindIcon onClick={skipToPrevious} className="button" />
       {isPlaying ? (
-        <PauseIcon onClick={handlePlayPause} className="button w-10 h-10 text-gray-200" />
+        <PauseIcon
+          onClick={handlePlayPause}
+          className="button w-10 h-10 text-gray-200"
+        />
       ) : (
-        <PlayIcon onClick={handlePlayPause} className="button w-10 h-10 text-gray-200" />
+        <PlayIcon
+          onClick={handlePlayPause}
+          className="button w-10 h-10 text-gray-200"
+        />
       )}
       <FastForwardIcon onClick={skipToNext} className="button" />
 
@@ -135,7 +142,6 @@ function Buttons() {
       {repeat === "track" && (
         <MdRepeatOne className="button text-green-500" onClick={toggleRepeat} />
       )}
-
     </div>
   );
 }

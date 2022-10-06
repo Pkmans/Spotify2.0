@@ -1,10 +1,10 @@
 import React from "react";
 
 import { useWindowSize } from "../lib/getWindowSize";
-import ProgressBar from "./ProgressBar";
 import TrackInfo from "./playerComponents/TrackInfo";
 import Buttons from "./playerComponents/Buttons";
 import VolumeSlider from "./playerComponents/VolumeSlider";
+import ProgressBar from "./playerComponents/ProgressBar";
 
 function Player() {
   const { width } = useWindowSize();

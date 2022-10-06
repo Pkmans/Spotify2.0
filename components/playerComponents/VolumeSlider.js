@@ -19,12 +19,14 @@ function VolumeSlider() {
     }
   }, []);
 
+  // On Volume Change, perform Debounced Update
   useEffect(() => {
     if (volume > 0 && volume < 100) {
       debouncedAdjustVolume(volume);
     }
   }, [volume]);
 
+  // Debounced func. for setting Volume
   const debouncedAdjustVolume = useCallback(
     debounce((volume) => {
       spotifyApi.setVolume(volume).catch((err) => {
@@ -35,7 +37,7 @@ function VolumeSlider() {
   );
 
   return (
-    <div className="flex items-center space-x-3 md:spacex-4 justify-end pr-5">
+    <div className="flex items-center space-x-3 md:spacex-4 justify-end">
       {volume <= 0 ? (
         <VolumeOffIcon className="button" />
       ) : (

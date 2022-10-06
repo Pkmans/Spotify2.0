@@ -26,11 +26,11 @@ function TrackInfo() {
 
 
   return (
-    <div className="flex items-center space-x-5 pl-5">
-      <img className="w-9 h-9" src={songInfo?.album.images[0].url} alt="" />
+    <div className="flex items-center space-x-5">
+      <img className="w-11 h-11" src={songInfo?.album.images[0].url} alt="" />
       <div>
         <h3 className="text-white">{songInfo?.name}</h3>
-        <p>{songInfo?.album.artists[0].name}</p>
+        <p className="text-sm">{songInfo?.album.artists[0].name}</p>
       </div>
     </div>
   );

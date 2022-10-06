@@ -2,6 +2,7 @@ import { debounce } from "lodash";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import useSongInfo from "../hooks/useSongInfo";
 import useSpotify from "../hooks/useSpotify";
+import { millisToMinutesAndSeconds } from "../lib/timeConverter";
 
 function ProgressBar() {
   const spotifyApi = useSpotify();
@@ -20,8 +21,9 @@ function ProgressBar() {
       return;
     }
 
-    setInterval(() => {
+    let id = setInterval(() => {
       // Update Progress Bar
+      console.log("update");
       spotifyApi.getMyCurrentPlaybackState().then((data) => {
         const progress = data.body?.progress_ms;
         setProgress(progress);
@@ -51,14 +53,20 @@ function ProgressBar() {
   }
 
   return (
-    <input
-      className="w-56 h-[20px]"
-      type="range"
-      value={progress}
-      min={0}
-      max={songInfo?.duration_ms}
-      onChange={handleChange}
-    />
+    <div className="flex w-[100%] items-center">
+      <p className="mr-2 text-sm"> {millisToMinutesAndSeconds(progress)}</p>
+
+      <input
+        className="w-[100%] h-[20px]"
+        type="range"
+        value={progress}
+        min={0}
+        max={songInfo?.duration_ms}
+        onChange={handleChange}
+      />
+
+      <p className="ml-2 text-sm">{millisToMinutesAndSeconds(songInfo?.duration_ms)}</p>
+    </div>
   );
 }
 

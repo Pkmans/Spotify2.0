@@ -120,9 +120,9 @@ function Buttons() {
       />
       <RewindIcon onClick={skipToPrevious} className="button" />
       {isPlaying ? (
-        <PauseIcon onClick={handlePlayPause} className="button w-10 h-10" />
+        <PauseIcon onClick={handlePlayPause} className="button w-10 h-10 text-gray-200" />
       ) : (
-        <PlayIcon onClick={handlePlayPause} className="button w-10 h-10" />
+        <PlayIcon onClick={handlePlayPause} className="button w-10 h-10 text-gray-200" />
       )}
       <FastForwardIcon onClick={skipToNext} className="button" />
 
@@ -135,7 +135,7 @@ function Buttons() {
       {repeat === "track" && (
         <MdRepeatOne className="button text-green-500" onClick={toggleRepeat} />
       )}
-      
+
     </div>
   );
 }

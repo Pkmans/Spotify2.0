@@ -12,13 +12,13 @@ function Player() {
   return (
     <>
       {width <= 639 ? (
-        <div className="bg-gradient-to-b from-black to-gray-900 text-gray-400 text-xs md:text-base pt-3 pb-2 px-2 md:px-8">
+        <div className="bg-gradient-to-b from-black to-gray-900 text-gray-400 text-xs md:text-base py-3 px-3 md:px-8">
           <div className="grid grid-cols-2">
             <TrackInfo />
             <VolumeSlider />
           </div>
 
-          <div className="grid items-center justify-center">
+          <div className="flex flex-col items-center justify-center">
             <Buttons />
             <ProgressBar />
           </div>
@@ -26,11 +26,11 @@ function Player() {
       ) : (
         <div
           className=" bg-gradient-to-b from-black to-gray-900 text-gray-400
-      grid grid-cols-3 text-xs md:text-base py-2 px-2 md:px-8"
+      grid grid-cols-3 text-xs md:text-base py-3 px-3 md:px-8"
         >
           <TrackInfo />
 
-          <div className="grid items-center justify-center">
+          <div className="flex flex-col items-center justify-center ">
             <Buttons />
             <ProgressBar />
           </div>

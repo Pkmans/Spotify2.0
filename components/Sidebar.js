@@ -33,35 +33,35 @@ function Sidebar({mobile}) {
     <div
       style={mobile && {zIndex: 1}}
       className={mobile ? ("absolute top-0 bg-black text-gray-400 p-5 text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide max-w-[50%] sm:inline-flex") :
-      ("text-gray-500 p-5 text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide sm:max-w-[10rem] md:max-w-[12rem] lg:max-w-[15rem] hidden sm:inline-flex")}
+      ("text-gray-500 p-5 text-xs lg:text-sm border-r border-gray-900 h-screen overflow-y-scroll scrollbar-hide w-[18rem] hidden sm:inline-flex")}
     >
-      <div>
+      <div className="w-full">
         <div className={mobile ? "space-y-3 pb-4" : "space-y-3 pb-28"}>
-          <button className="flex items-center space-x-2 hover:text-white">
+          <button className="flex items-center space-x-2 hover:text-white w-full">
             <HomeIcon className="w-5 h-5" />
             <p>Home</p>
           </button>
-          <button className="flex items-center space-x-2 hover:text-white">
+          <button className="flex items-center space-x-2 hover:text-white w-full">
             <SearchIcon className="w-5 h-5" />
             <p>Search</p>
           </button>
-          <button className="flex items-center space-x-2 hover:text-white">
+          <button className="flex items-center space-x-2 hover:text-white w-full">
             <LibraryIcon className="w-5 h-5" />
             <p>Your Library</p>
           </button>
           <hr className="border-gray-800" />
 
-          <button className="flex items-center space-x-2 hover:text-white">
+          <button className="flex items-center space-x-2 hover:text-white w-full">
             <PlusCircleIcon className="w-5 h-5" />
-            <p>Create Playlist</p>
+            <p  className="truncate">Create Playlist</p>
           </button>
-          <button className="flex items-center space-x-2 hover:text-white">
+          <button className="flex items-center space-x-2 hover:text-white w-full">
             <HeartIcon className="w-5 h-5" />
-            <p>Liked Songs</p>
+            <p className="truncate">Liked Songs</p>
           </button>
-          <button className="flex items-center space-x-2 hover:text-white">
+          <button className="flex items-center space-x-2 hover:text-white w-full">
             <RssIcon className="w-5 h-5" />
-            <p>Your Episodes</p>
+            <p className="truncate">Your Episodes</p>
           </button>
           <hr className="border-gray-800" />
 
@@ -69,7 +69,7 @@ function Sidebar({mobile}) {
             <p
               key={playlist.id}
               onClick={() => setPlaylistId(playlist.id)}
-              className="cursor-pointer hover:text-white"
+              className="cursor-pointer hover:text-white truncate"
             >
               {playlist.name}
             </p>

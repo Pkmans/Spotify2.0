@@ -1,8 +1,8 @@
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-import { isPlayingState } from "../../atoms/songAtom";
+import { currentTrackIdState, isPlayingState } from "../../atoms/songAtom";
 import useSongInfo from "../../hooks/useSongInfo";
 import useSpotify from "../../hooks/useSpotify";
 import { millisToMinutesAndSeconds } from "../../lib/timeConverter";
@@ -12,9 +12,9 @@ function ProgressBar() {
   const spotifyApi = useSpotify();
   const songInfo = useSongInfo();
 
+  const [currentTrackId, setCurrentTrackId] =
+    useRecoilState(currentTrackIdState);
   const [progress, setProgress] = useState(0);
-  // Manual Progress used to differentiate between
-  // polling updates vs. user input updates
   const [manualProgress, setManualProgress] = useState(0);
   const isPlaying = useRecoilValue(isPlayingState);
   const [manualUpdate, setManualUpdate] = useState(false);
@@ -36,11 +36,20 @@ function ProgressBar() {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
       const progress = data.body?.progress_ms;
       setProgress(progress);
+
+      // If progress is 0, skipToNext or skipToPrevious might have been called
+      if (progress < 5000) {
+        spotifyApi.getMyCurrentPlayingTrack().then((data) => {
+          if (data.body?.item.id !== currentTrackId) {
+            setCurrentTrackId(data.body?.item.id);
+          }
+        });
+      }
     });
   }
 
-  // Extra manualProgress state used for debounce call
-  // to prevent infinite re-renders
+  // - Extra manualProgress state used for debounce call to prevent infinite re-renders
+  // - Differentiate between polling updates vs. user input updates
   useEffect(() => {
     if (manualProgress > 0 && manualProgress < songInfo?.duration_ms) {
       debouncedSeekProgress(manualProgress);
@@ -63,7 +72,7 @@ function ProgressBar() {
     setProgress(Number(e.target.value));
 
     setTimeout(() => {
-      console.log('timeout');
+      console.log("timeout");
       setManualUpdate(false);
     }, 200);
   }

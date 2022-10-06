@@ -36,9 +36,10 @@ function Buttons() {
 
     // Set existing Spotify Shuffle State & Repeat Mode
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      console.log(data);
-      setShuffle(data.body?.shuffle_state);
-      setRepeat(data.body?.repeat_state);
+      if (data.body) {
+        setShuffle(data.body.shuffle_state);
+        setRepeat(data.body.repeat_state);
+      };
     });
   }, []);
 

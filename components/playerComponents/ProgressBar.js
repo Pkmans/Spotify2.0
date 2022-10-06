@@ -1,19 +1,26 @@
 import { debounce } from "lodash";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useRecoilValue } from "recoil";
+
+import { isPlayingState } from "../../atoms/songAtom";
 import useSongInfo from "../../hooks/useSongInfo";
 import useSpotify from "../../hooks/useSpotify";
 import { millisToMinutesAndSeconds } from "../../lib/timeConverter";
+import useInterval from "../../hooks/useInterval";
 
 function ProgressBar() {
   const spotifyApi = useSpotify();
   const songInfo = useSongInfo();
 
+  const ref = useRef(false);
   const [progress, setProgress] = useState(0);
   // Manual Progress used to differentiate between
   // polling updates vs. user input updates
   const [manualProgress, setManualProgress] = useState(0);
-  const ref = useRef(false);
+  const [id, setId] = useState(null);
+  const isPlaying = useRecoilValue(isPlayingState);
 
+  
   // Begin Progress Polling on initial Render
   useEffect(() => {
     if (!ref.current) {
@@ -21,7 +28,19 @@ function ProgressBar() {
       return;
     }
 
-    let id = setInterval(() => {
+    // Get initial song progress
+    spotifyApi.getMyCurrentPlaybackState().then((data) => {
+      const progress = data.body?.progress_ms;
+      setProgress(progress);
+    });
+
+    // Stop Progress Polling when song is paused
+    if (!isPlaying) {
+      clearInterval(id);
+      return;
+    }
+
+    let intervalId = setInterval(() => {
       // Update Progress Bar
       console.log("update");
       spotifyApi.getMyCurrentPlaybackState().then((data) => {
@@ -29,9 +48,13 @@ function ProgressBar() {
         setProgress(progress);
       });
     }, 1000);
-  }, []);
 
-  // extra manualProgress state used for debounce call.
+    setId(intervalId);
+  }, [isPlaying]);
+
+
+  // Extra manualProgress state used for debounce call 
+  // to prevent infinite re-renders
   useEffect(() => {
     if (manualProgress > 0 && manualProgress < songInfo?.duration_ms) {
       debouncedSeekProgress(manualProgress);
@@ -41,7 +64,7 @@ function ProgressBar() {
   const debouncedSeekProgress = useCallback(
     debounce((manualProgress) => {
       spotifyApi.seek(manualProgress).catch((err) => {
-        console.log(err);
+        console.log(err); 
       });
     }, 200),
     []
@@ -65,7 +88,9 @@ function ProgressBar() {
         onChange={handleChange}
       />
 
-      <p className="ml-2 text-sm">{millisToMinutesAndSeconds(songInfo?.duration_ms)}</p>
+      <p className="ml-2 text-sm">
+        {millisToMinutesAndSeconds(songInfo?.duration_ms)}
+      </p>
     </div>
   );
 }

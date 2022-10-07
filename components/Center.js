@@ -23,7 +23,7 @@ const colors = [
   "from-purple-500",
 ];
 
-function Center({ showSideBar, toggleSideBar }) {
+function Center({ showSideBar, toggleSideBar, setShowSideBar }) {
   const spotifyApi = useSpotify();
   const [color, setColor] = useState(null);
   const playlistId = useRecoilValue(playlistIdState);
@@ -66,7 +66,7 @@ function Center({ showSideBar, toggleSideBar }) {
       }
     >
       {width <= 639 ? (
-        <Navbar toggleSideBar={toggleSideBar} color={color} />
+        <Navbar toggleSideBar={toggleSideBar} color={color} setShowSideBar={setShowSideBar} />
       ) : (
         <div className="absolute top-5 right-5">
           <ProfileButton />

@@ -16,7 +16,7 @@ export default function Home() {
     <div className="bg-black h-screen overflow-hidden">
       <main className="flex">
         <Sidebar />
-        <Center showSideBar={showSideBar} toggleSideBar={toggleSideBar} />
+        <Center showSideBar={showSideBar} toggleSideBar={toggleSideBar} setShowSideBar={setShowSideBar}/>
       </main>
       <div
         className={showSideBar ? "sticky bottom-0 blur-sm" : "sticky bottom-0"}

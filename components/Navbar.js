@@ -4,7 +4,7 @@ import { useWindowSize } from "../lib/getWindowSize";
 import BurgerMenu from "./BurgerMenu";
 import ProfileButton from "./ProfileButton";
 
-function Navbar({toggleSideBar}) {
+function Navbar({toggleSideBar, setShowSideBar}) {
   const { width } = useWindowSize();
 
   return (
@@ -15,7 +15,7 @@ function Navbar({toggleSideBar}) {
           : `profile-button flex justify-end p-2 bg-gray-800` 
       }
     >
-      {width <= 639 && <BurgerMenu toggleSideBar={toggleSideBar}/>}
+      {width <= 639 && <BurgerMenu toggleSideBar={toggleSideBar} setShowSideBar={setShowSideBar}/>}
       <ProfileButton />
     </header>
   );

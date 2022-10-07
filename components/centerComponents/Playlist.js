@@ -11,7 +11,7 @@ function Playlist({ color, playlist, playlistDuration }) {
         className={`center-header flex items-end space-x-7 bg-gradient-to-b to-[#0e0e0e] ${color} text-white p-8 pt-24`}
       >
         <img
-          className="shadow-2xl lg:w-[12.5rem] lg:h-[12.5rem] md:w-[10.5rem] md:h-[10.5rem] 
+          className="album-image shadow-2xl lg:w-[12.5rem] lg:h-[12.5rem] md:w-[10.5rem] md:h-[10.5rem] 
           w-[11rem] h-[11rem]"
           src={playlist?.images?.[0].url}
         />

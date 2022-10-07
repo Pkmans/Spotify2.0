@@ -22,6 +22,8 @@ function Sidebar({ mobile }) {
   const [showLikedSongs, setShowLikedSongs] = useRecoilState(showLikedSongsState);
   const [likedSongs, setLikedSongs] = useRecoilState(likedSongsState);
 
+  console.log(playlists);
+
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
       // Get User's Playlists

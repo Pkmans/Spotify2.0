@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotify 2.0 Clone
+A React Music App utilizing Spotify's Web API. 
 
-## Getting Started
+Live Demo - [Spotify 2.0](https://spotify-clone-pkmans.vercel.app/login)  
+Built with - [React](https://reactjs.org/) · [NextJs](https://nextjs.org/) · [NextAuth](https://next-auth.js.org/) · [Recoil](https://recoiljs.org/) · [TailwindCSS](https://tailwindcss.com/)
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+# Functionality
+**Only works with an active Spotify device.**  
+```Application serves as a REMOTE CONTROL for the real Spotify app.```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Login using Oauth2.0 for Spotify
+- Display user's personal Spotify playlists in Sidebar
+- Display up to 100 songs from each playlist
+- Play/Pause music playback 
+- Skip to next track in playlist
+- Skip to previous track in playlist
+- Toggle Shuffle Mode
+- Toggle Repeat Mode
+- Scrubbing through a song
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+# Limitations
+- Song Progress bar may stutter when scrubbing at the EXACT SAME time the poll to fetch song progress is run. 
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+# ScreenShots
+![Screen Shot 2022-10-07 at 2 35 40 PM](https://user-images.githubusercontent.com/60535510/194661837-876b4f59-9fd5-449a-8707-e4d19ed4cda3.png)
+![Screen Shot 2022-10-07 at 2 36 30 PM](https://user-images.githubusercontent.com/60535510/194661862-76c5fbf2-43e2-41ef-b62a-53ca7e09f85e.png)
+![Screen Shot 2022-10-07 at 2 37 05 PM](https://user-images.githubusercontent.com/60535510/194661894-726bdbf1-2dfa-494c-83d9-122844c05337.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+([back to top](#spotify-20-clone))

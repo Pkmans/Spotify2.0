@@ -26,7 +26,6 @@ function ProgressBar() {
 
   useInterval(
     () => {
-      console.log("update");
       getCurrentProgress();
     },
     isPlaying && !manualUpdate ? 1000 : null
@@ -65,6 +64,7 @@ function ProgressBar() {
     []
   );
 
+  // Update progress bar when user drags slider
   function handleChange(e) {
     setManualUpdate(true);
 

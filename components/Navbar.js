@@ -7,7 +7,6 @@ import ProfileButton from "./ProfileButton";
 function Navbar({toggleSideBar}) {
   const { width } = useWindowSize();
 
-
   return (
     <header
       className={

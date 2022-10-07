@@ -7,19 +7,29 @@ import useSpotify from "../hooks/useSpotify";
 import { millisToMinutesAndSeconds } from "../lib/timeConverter";
 import audioBarAnimation from "../lib/audioBarAnimation.json";
 
-function Song({ playlist, track, order }) {
+function Song({ playlist, track, order, likedSongs }) {
   const spotifyApi = useSpotify();
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState);
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
 
+  // map through likedSongs to get array of track uris
+  const uris = likedSongs?.items.map((track) => track.track.uri);
+
   function playSong() {
     setCurrentTrackId(track.track.id);
     setIsPlaying(true);
-    spotifyApi.play({
-      context_uri: playlist.uri,
-      offset: { uri: track.track.uri },
-    });
+    if (likedSongs) {
+      spotifyApi.play({
+        uris,
+        offset: { uri: track.track.uri },
+      });
+    } else {
+      spotifyApi.play({
+        context_uri: playlist.uri,
+        offset: { uri: track.track.uri },
+      });
+    }
   }
 
   return (
@@ -33,6 +43,7 @@ function Song({ playlist, track, order }) {
           isPlaying ? (
             <Lottie
               animationData={audioBarAnimation}
+              className="shrink-0"
               style={{ width: 25 }}
               loop={true}
             />

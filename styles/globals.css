@@ -49,7 +49,7 @@ a {
     margin-left: 0px !important;
   }
 
-  .center-header img {
+  .center-header .album-image {
     margin: auto;
     margin-bottom: 1rem;
   }

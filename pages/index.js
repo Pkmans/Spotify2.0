@@ -1,4 +1,4 @@
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 import Center from "../components/Center";
 import Sidebar from "../components/Sidebar";
@@ -6,23 +6,21 @@ import Player from "../components/Player";
 import { useState } from "react";
 
 export default function Home() {
-  const { data: session } = useSession();
   const [showSideBar, setShowSideBar] = useState(false);
-
 
   function toggleSideBar() {
     setShowSideBar((prev) => !prev);
   }
 
-  // console.log('home page session is', session);
-
   return (
     <div className="bg-black h-screen overflow-hidden">
       <main className="flex">
         <Sidebar />
-        <Center showSideBar={showSideBar} toggleSideBar={toggleSideBar}/>
+        <Center showSideBar={showSideBar} toggleSideBar={toggleSideBar} />
       </main>
-      <div className={showSideBar ? "sticky bottom-0 blur-sm" : "sticky bottom-0"} >
+      <div
+        className={showSideBar ? "sticky bottom-0 blur-sm" : "sticky bottom-0"}
+      >
         <Player />
       </div>
     </div>

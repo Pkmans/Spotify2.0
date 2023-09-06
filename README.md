@@ -1,4 +1,4 @@
-# Spotify 2.0 Clone - [LIVE DEMO](https://spotify-clone-pkmans.vercel.app/login) 
+# Spotify 2.0 Clone - [Live Demo](https://spotify-clone-pkmans.vercel.app/login) 
 A React Music App utilizing Spotify's Web API. 
 
 Live Demo - [Spotify 2.0](https://spotify-clone-pkmans.vercel.app/login)  
